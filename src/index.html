@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,14 +9,92 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <h1>TOTAL PRIZE: <span id="totalPrize">1000 ETH</span></h1>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/web3.min.js"></script>
-    <script src="js/truffle-contract.js"></script>
-    <script src="js/app.js"></script>
+    <h1 id="totalPrize" class="text-center">TOTAL PRIZE: <span id="totalPrize">1000 ETH</span></h1>
+
+    <div class=”container”>
+        <h2 id="lastWinner" class="text-center">Last Winners</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Prize</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>0x123456789</td>
+                    <td>First Prize</td>
+                    <td>100 ETH</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>0x123456789</td>
+                    <td>Second Prize</td>
+                    <td>10 ETH</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>0x123456789</td>
+                    <td>Third Prize</td>
+                    <td>1 ETH</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class=”container”>
+        <h2 id="todayPlayer" class="text-center">Today's Players</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Ticket</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>0x123456789</td>
+                    <td>12345678</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>0x123456789</td>
+                    <td>12345678</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>0x123456789</td>
+                    <td>12345678</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="connectMMContainer" class="container">
+        <a name="MetaMask" id="connectMMBtn" class="btn btn-primary" href="#" role="button">Connect Meta Mask</a>
+
+
+    </div>
+    <div id="buyTicketContainer" class="container">
+
+
+
+    </div>
 </body>
+<!-- jQuery (necessary for Bootstrap 's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/web3.min.js"></script>
+<script src="js/truffle-contract.js"></script>
+<script src="js/app.js"></script>
+</body>
+
 </html>
