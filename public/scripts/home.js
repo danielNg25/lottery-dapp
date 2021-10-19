@@ -1,7 +1,7 @@
-jQuery(document).on("ready", function() {
-    console.log("good");
-
-    alert("hehe");
-
+$(()=>{
+    console.log("home load");
+    $("#connectMMContainer").on("click", ()=>{
+        ethereum.request({ method: 'eth_requestAccounts' });
+    })
 
 });
