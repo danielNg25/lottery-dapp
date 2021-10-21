@@ -5,29 +5,27 @@ import "../contracts/Ownable.sol";
 
 contract BaseLottery is Ownable{
     // price for 1 ticket
+    uint32 public playersCount = 0;
     uint public ticketPrice = 0.001 ether;
-    // percent of ticket price the owner will receive
-    uint ticketFee = 5;
+    uint public todaysPrize = 0;
+    
 
     struct Player{
-        uint id;
+        uint32 ticket;
         address wallet;
-        uint ticket;
     }
     //store all current players
-    mapping (uint => Player) public playersMap;
-    uint public playersCount;
+    mapping (uint32 => Player) public playersMap;
     
-
-    
-
-    function buyTicket(uint _ticket) external payable{
+    //function to buy ticket
+    function buyTicket(uint32 _ticket) external payable{
         require(msg.value == ticketPrice);
         playersCount++;
-        playersMap[playersCount] = Player(playersCount, msg.sender, _ticket);
+        playersMap[playersCount] = Player(_ticket, msg.sender);
+        todaysPrize += ticketPrice;
     }
 
-    
+    //get Pirze
     function getBalance() public view returns (uint256) {
         return address(this).balance;
     }

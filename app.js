@@ -7,8 +7,9 @@ var app = express();
 var router = express.Router();
 
 app.use(express.static("public"));
-app.use("modules", express.static(path.join(__dirname, "/node_modules")));
+app.use("/modules", express.static(path.join(__dirname, "/node_modules")));
 //app.use("scripts", express.static(path.join(__dirname, "/controllers")))
+app.use('/truffle', express.static(path.join(__dirname, '/build/contracts')));
 app.set("view engine", "ejs");
 app.set("views", "./views");
 

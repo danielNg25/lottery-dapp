@@ -82,9 +82,14 @@
 
     </div>
     <div id="buyTicketContainer" class="container">
-
-
-
+        <form>
+            <div class="form-group">
+                <label for="inputTicketNumber">Buy a ticket</label>
+                <input type="text" name="ticketNumber" id="inputTicketNumber" class="form-control" placeholder="Ticket Number" aria-describedby="helpId">
+                <small id="helpId" class="text-muted">Ticket number must be a 6 digit number</small>
+            </div>
+            <button type="button" id="buyTicketBtn" class="btn btn-primary">Buy Ticket</button>
+        </form>
     </div>
 </body>
 
