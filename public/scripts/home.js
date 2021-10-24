@@ -19,6 +19,7 @@ $(() => {
         } else {
             App.getTicketPrize().then(price => {
                 App.buyTicket(price, parseInt(ticketNumber)).then(() => {
+                    //$("#inputTicketNumber").html("");
                     alert("Buy successful");
                 });
             }).catch((err) => {
