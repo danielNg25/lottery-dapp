@@ -4,6 +4,9 @@ pragma solidity >=0.4.22;
 import "../contracts/BaseLottery.sol";
 
 contract LotteryResult is BaseLottery{
+
+    event onBalanceUpdate(uint _balance, address _wallet);
+
     uint32 public lastResult;
     uint32 public winnersCount = 0;
     //save all last winners
@@ -33,18 +36,26 @@ contract LotteryResult is BaseLottery{
     function addPrizeToWallet() private{
         //send fee to the owner
         address _owner = owner();
-        balances[_owner] += todaysPrize/20;
+        addToBalance(_owner, todaysPrize/20);
         //send fee to the winners
         uint _prizeValue = (todaysPrize-todaysPrize/20)/winnersCount;
         for(uint32 i =1; i <= winnersCount; i++){
-            balances[winnersMap[winnersCount].wallet]+= _prizeValue;
+            addToBalance(winnersMap[winnersCount].wallet, _prizeValue);
         }
-
     }
 
-    function withdraw(uint amount) public returns(bool){
-        require(balances[msg.sender] >= amount);
-        (bool sent,) = payable(msg.sender).call{value: amount}("");
+    function addToBalance(address _wallet, uint _amount) private{
+        balances[_wallet] += _amount;
+        emit onBalanceUpdate(balances[_wallet], _wallet);
+    }
+
+    function withdraw(uint _amount) public returns(bool){
+        require(balances[msg.sender] >= _amount);
+        (bool sent,) = payable(msg.sender).call{value: _amount}("");
+        if(sent){
+            balances[msg.sender] -= _amount;
+            emit onBalanceUpdate(balances[msg.sender], msg.sender);
+        }
         return sent;
     }
 
