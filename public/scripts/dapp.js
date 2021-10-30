@@ -2,7 +2,8 @@ App = {
     contracts: {},
     load: async() => {
         await App.loadWeb3();
-        await App.loadContract();
+        // await App.loadBaseLotteryContract();
+        await App.loadLotteryResultContract();
     },
     loadWeb3: async() => {
         if (typeof window.ethereum !== 'undefined') {
@@ -38,13 +39,22 @@ App = {
     loadAccount: async() => {
 
     },
-    loadContract: async() => {
-        const contractJson = await $.getJSON('./truffle/BaseLottery.json');
-        console.log(contractJson);
-        App.contracts.BaseLottery = TruffleContract(contractJson);
-        App.contracts.BaseLottery.setProvider(App.web3Provider);
-        App.BaseLottery = await App.contracts.BaseLottery.deployed();
+    // loadBaseLotteryContract: async() => {
+    //     const contractJson = await $.getJSON('./truffle/BaseLottery.json');
+    //     console.log(contractJson);
+    //     App.contracts.BaseLottery = TruffleContract(contractJson);
+    //     App.contracts.BaseLottery.setProvider(App.web3Provider);
+    //     App.BaseLottery = await App.contracts.BaseLottery.deployed();
+    // },
+    loadLotteryResultContract: async()=>{
+        const lotteryResultContractJson = await $.getJSON('./truffle/LotteryResult.json');
+        console.log(lotteryResultContractJson);
+        App.contracts.LotteryResult = TruffleContract(lotteryResultContractJson);
+        App.contracts.LotteryResult.setProvider(App.web3Provider);
+        App.LotteryResult = await App.contracts.LotteryResult.deployed();
     },
+
+
 
     connectMM: async() => {
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
@@ -52,13 +62,22 @@ App = {
         web3.eth.defaultAccount = accounts[0];
         return accounts;
     },
+    getTodayPrize: async()=>{
+        var prize = await App.LotteryResult.todaysPrize();
+        return prize.toNumber();
+    },
     getTicketPrize: async() => {
-        var price = await App.BaseLottery.ticketPrice();
+        var price = await App.LotteryResult.ticketPrice();
         return price.toNumber();
     },
     buyTicket: async(price, ticketNumber) => {
-        await App.BaseLottery.buyTicket(ticketNumber, { from: App.account, value: price });
-    }
+        await App.LotteryResult.buyTicket(ticketNumber, { from: App.account, value: price });
+    },
+    getAccountBalance: async()=>{
+        var balance = await App.LotteryResult.getAccountBalance();
+        return balance.toNumber();
+    },
+
 
 }
 

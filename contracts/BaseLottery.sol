@@ -4,6 +4,9 @@ pragma solidity >=0.4.22;
 import "../contracts/Ownable.sol";
 
 contract BaseLottery is Ownable{
+
+    event onPrizeChange(uint _prize);
+
     // price for 1 ticket
     uint32 public playersCount = 0;
     uint public ticketPrice = 0.001 ether;
@@ -23,6 +26,8 @@ contract BaseLottery is Ownable{
         playersCount++;
         playersMap[playersCount] = Player(_ticket, msg.sender);
         todaysPrize += ticketPrice;
+
+        emit onPrizeChange(todaysPrize);
     }
 
     //get Pirze

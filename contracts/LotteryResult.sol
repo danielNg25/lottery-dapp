@@ -21,6 +21,11 @@ contract LotteryResult is BaseLottery{
         todaysPrize = 0;
     }
 
+    //get account's balance
+    function getAccountBalance() public view returns(uint){
+        return balances[msg.sender];
+    }
+
     //find the winners
     function processPrize(uint32 _result) private {
         winnersCount = 0;

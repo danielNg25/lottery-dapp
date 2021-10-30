@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <h1 id="totalPrize" class="text-center">TOTAL PRIZE: <span id="totalPrize">1000 ETH</span></h1>
+    <h1 id="totalPrize" class="text-center">TOTAL PRIZE: <span id="totalPrizeSpan">1000</span> ETH</h1>
 
     <div class=”container”>
         <h2 id="lastWinner" class="text-center">Last Winners</h2>
@@ -83,7 +83,7 @@
     </div>
     <div id="buyTicketContainer" class="container">
         <div id="yourBalance">
-            <h2 id="balanceText">Your Balance in Contract: 100 ETH</h2>
+            <h2 id="balanceText">Your Balance in Contract: <span id="yourBalanceText">100</span> ETH</h2>
         </div>
         <form>
             <div class="form-group">
@@ -106,7 +106,7 @@ Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/jquery.js"></script>
 
 <script src="js/bootstrap.min.js"></script>
-<script src="js/web3.min.js"></script>
+<script src="/modules/web3/dist/web3.min.js"></script>
 <script src="js/truffle-contract.js"></script>
 <script src="scripts/dapp.js"></script>
 <script src="scripts/home.js"></script>

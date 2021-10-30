@@ -1,13 +1,25 @@
 $(() => {
+
     $("#buyTicketContainer").hide();
     console.log("home load");
     $("#connectMMContainer").on("click", () => {
         App.connectMM().then((accounts) => {
             console.log(accounts[0]);
+            //update front-end
             $("#connectMMContainer").hide();
             $("#buyTicketContainer").show();
-        }).catch(() => {
+            App.getAccountBalance().then(balance=>{
+               updateYourBalance(balance);
+            })
+            App.getTodayPrize().then(prize=>{
+                updatePrize(prize);
+            });
+            //listen for event
+            listenToPrizeChangeEvent();
+
+        }).catch((err) => {
             alert("Could not connect to MetaMask");
+            console.log(err);
         })
 
     })
@@ -29,4 +41,48 @@ $(() => {
         }
 
     })
+
+    //listen to events
+    
 });
+
+//update front end
+function updateYourBalance(num){
+    $('#yourBalanceText').text(num);
+}
+
+function updatePrize(prize){
+    prize = web3.utils.fromWei(prize.toString());
+    $('#totalPrizeSpan').text(prize);
+    
+}
+
+
+function listenToBalanceChangeEvent(){
+    App.LotteryResult.onBalanceUpdate({},{
+        fromBlock: 0,
+        toBlock: 'latest'
+    }).watch((err, event)=>{
+      if(!err){
+          
+      }  
+    })
+}
+
+function listenToPrizeChangeEvent(){
+    App.LotteryResult.onPrizeChange({
+        filter: {},
+        fromBlock: 0,
+        toBlock:'latest'
+    }, (err, event)=>{
+        if(err){
+            console.log(err);
+        }else{
+            var prize = event.returnValues._prize;
+            
+            console.log(prize);
+            updatePrize(prize);
+        }
+        
+    })
+}
