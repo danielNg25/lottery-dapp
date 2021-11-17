@@ -7,15 +7,16 @@ contract LotteryResult is BaseLottery{
 
     event onBalanceUpdate(uint _balance, address _wallet);
 
+    uint32 private resultLength = 1000000;
     uint32 public lastResult;
     uint32 public winnersCount = 0;
     //save all last winners
     mapping (uint32 => Player) public winnersMap;
     mapping (address => uint) public balances;
     //set the ticket result by the contract owner
-    function setResult(uint32 _result) external onlyOwner{
-        lastResult = _result;
-        processPrize(_result);
+    function setResult() external onlyOwner{
+        lastResult = getRandomNumber(resultLength);
+        processPrize();
         addPrizeToWallet();
         playersCount = 0;
         todaysPrize = 0;
@@ -27,10 +28,10 @@ contract LotteryResult is BaseLottery{
     }
 
     //find the winners
-    function processPrize(uint32 _result) private {
+    function processPrize() private {
         winnersCount = 0;
         for(uint32 i = 1; i <= playersCount; i++){
-            if(playersMap[i].ticket == _result){
+            if(playersMap[i].ticket == lastResult){
                 winnersCount ++;
                 winnersMap[winnersCount] = playersMap[i];
             }
@@ -43,10 +44,13 @@ contract LotteryResult is BaseLottery{
         address _owner = owner();
         addToBalance(_owner, todaysPrize/20);
         //send fee to the winners
-        uint _prizeValue = (todaysPrize-todaysPrize/20)/winnersCount;
-        for(uint32 i =1; i <= winnersCount; i++){
-            addToBalance(winnersMap[winnersCount].wallet, _prizeValue);
+        if(winnersCount > 0){
+            uint _prizeValue = (todaysPrize-todaysPrize/20)/winnersCount;
+            for(uint32 i =1; i <= winnersCount; i++){
+                addToBalance(winnersMap[winnersCount].wallet, _prizeValue);
+            }
         }
+        
     }
 
     function addToBalance(address _wallet, uint _amount) private{
@@ -59,9 +63,12 @@ contract LotteryResult is BaseLottery{
         (bool sent,) = payable(msg.sender).call{value: _amount}("");
         if(sent){
             balances[msg.sender] -= _amount;
-            emit onBalanceUpdate(balances[msg.sender], msg.sender);
+            emit onBalanceUpdate(balances[msg.sender], msg.sender); 
         }
         return sent;
     }
-
+    
+    function getRandomNumber(uint32 _number) public view returns (uint32){
+        return uint32(uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty)))%_number);
+    }
 }
