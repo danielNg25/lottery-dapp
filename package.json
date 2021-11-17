@@ -2,19 +2,7 @@
   "name": "Lottery",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
-  "directories": {
-    "test": "test"
-  },
-  "dependencies": {
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "socket.io": "^4.3.1",
-    "truffle": "^5.4.15",
-    "truffle-contract": "^4.0.31",
-    "web3": "^1.6.0"
-  },
-  "devDependencies": {},
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
