@@ -1,2 +1,5 @@
 smartcontract/node_modules/
 smartcontract/build/
+smartcontract/.secret
+smartcontract/.env
+node_modules/

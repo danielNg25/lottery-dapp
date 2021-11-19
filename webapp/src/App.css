@@ -36,3 +36,99 @@
     transform: rotate(360deg);
   }
 }
+
+.top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #444;
+  z-index: 999;
+  color: white;
+  position: sticky;
+  top: 0;
+}
+
+.topLeft {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.topRight {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.topCenter {
+  flex: 6;
+}
+.topTitle {
+  cursor: pointer;
+}
+.topList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+.topListItem {
+  margin-left: 10%;
+  cursor: pointer;
+  margin-right: 10%;
+}
+.topListItem:hover {
+  color: lightgray;
+}
+
+.header {
+  padding: 2%;
+  background-color: pink;
+  text-align: center;
+}
+
+.todayPrize{
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.play{
+  padding: 1%;
+  background-color: white;
+  margin-bottom: 2%;
+}
+
+.balance{
+  margin-bottom: 1%;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+}
+.userTicket{
+  margin-bottom: 1%;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  color: tomato;
+}
+
+.ticketInput{
+  margin-right: 2%;
+  width: 30%;
+}
+
+table, th, td{
+  border: solid 1px black;
+}
+
+table{
+  margin: 2% 5%;
+  width: 90%;
+  
+}
+
+.link{
+  text-decoration: none;
+  color: inherit;
+}

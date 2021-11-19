@@ -5,14 +5,14 @@ import "../contracts/BaseLottery.sol";
 
 contract LotteryResult is BaseLottery{
 
-    event onBalanceUpdate(uint _balance, address _wallet);
 
-    uint32 private resultLength = 1000000;
+
+    uint32 private resultLength = 100;
     uint32 public lastResult;
     uint32 public winnersCount = 0;
     //save all last winners
     mapping (uint32 => Player) public winnersMap;
-    mapping (address => uint) public balances;
+
     //set the ticket result by the contract owner
     function setResult() external onlyOwner{
         lastResult = getRandomNumber(resultLength);
@@ -41,8 +41,7 @@ contract LotteryResult is BaseLottery{
     //send prize money to the winners
     function addPrizeToWallet() private{
         //send fee to the owner
-        address _owner = owner();
-        addToBalance(_owner, todaysPrize/20);
+
         //send fee to the winners
         if(winnersCount > 0){
             uint _prizeValue = (todaysPrize-todaysPrize/20)/winnersCount;
@@ -53,10 +52,7 @@ contract LotteryResult is BaseLottery{
         
     }
 
-    function addToBalance(address _wallet, uint _amount) private{
-        balances[_wallet] += _amount;
-        emit onBalanceUpdate(balances[_wallet], _wallet);
-    }
+
 
     function withdraw(uint _amount) public returns(bool){
         require(balances[msg.sender] >= _amount);

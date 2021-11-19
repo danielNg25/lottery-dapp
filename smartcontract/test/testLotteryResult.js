@@ -40,7 +40,7 @@ contract("LotteryResult", function(accounts) {
 
                 let ownerBalance = await lotteryResultInstance.balances(accounts[0]);
                 ownerBalance = ownerBalance.toNumber();
-                assert.equal(ownerBalance, ticketPrice * 2 / 20, 'contract owner gets the correct balance');
+                assert.equal(ownerBalance, ticketPrice * 2 / 100, 'contract owner gets the correct balance');
             });
     });
 
@@ -50,12 +50,12 @@ contract("LotteryResult", function(accounts) {
             contractBalance = contractBalance.toNumber();
             assert.equal(contractBalance, ticketPrice * 2, 'contract balance is correct');
 
-            let sent = await lotteryResultInstance.withdraw(ticketPrice * 2 / 20, { from: accounts[0] });
+            let sent = await lotteryResultInstance.withdraw(ticketPrice * 2 /100, { from: accounts[0] });
             assert(sent, true, "Sent transaction successfully!");
 
             contractBalance = await lotteryResultInstance.getBalance();
             contractBalance = contractBalance.toNumber();
-            assert.equal(contractBalance, ticketPrice * 2 * 19 / 20, 'contract balance is correct');
+            assert.equal(contractBalance, ticketPrice * 2 * 99 / 100, 'contract balance is correct');
         });
     });
 })
