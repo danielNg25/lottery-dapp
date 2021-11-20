@@ -2,7 +2,7 @@ const BaseLottery = artifacts.require("./BaseLottery.sol");
 
 contract("BaseLottery", function(accounts) {
     let baseLotteryInstance;
-    let ticketNumber = 123456;
+    let ticketNumber = 12;
     let ticketPrice;
     //test buy ticket function
     before(async() => {
