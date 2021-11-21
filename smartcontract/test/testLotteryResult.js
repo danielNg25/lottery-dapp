@@ -1,8 +1,8 @@
 const LotteryResult = artifacts.require("./LotteryResult.sol");
 contract("LotteryResult", function(accounts) {
     let lotteryResultInstance;
-    let ticketNumber_1 = 654321;
-    let ticketNumber_2 = 123456;
+    let ticketNumber_1 = 65;
+    let ticketNumber_2 = 12;
     let ticketPrice;
 
     before(async() => {
@@ -50,7 +50,7 @@ contract("LotteryResult", function(accounts) {
             contractBalance = contractBalance.toNumber();
             assert.equal(contractBalance, ticketPrice * 2, 'contract balance is correct');
 
-            let sent = await lotteryResultInstance.withdraw(ticketPrice * 2 /100, { from: accounts[0] });
+            let sent = await lotteryResultInstance.withdraw(ticketPrice * 2 / 100, { from: accounts[0] });
             assert(sent, true, "Sent transaction successfully!");
 
             contractBalance = await lotteryResultInstance.getBalance();

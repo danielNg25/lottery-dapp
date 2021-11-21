@@ -1,4 +1,4 @@
-export const LOTTERY_ADDRESS = "0x0Fa8b81A3a71a278C3b2A1719eF6B84754cA2Ced"
+export const LOTTERY_ADDRESS = "0x600E5CB56D9E863a4754b8cC7e7C4B7acE4239D9"
 
 export const LOTTERY_ABI = [{
         "anonymous": false,

@@ -35,13 +35,13 @@ contract("BaseLottery", function(accounts) {
 
             it('Update ticket prize successfully', async() => {
                 let prize = await baseLotteryInstance.todaysPrize();
-                assert.equal(prize.toNumber(), ticketPrice, 'correct ticket prize');
+                assert.equal(prize.toNumber(), ticketPrice * 99 / 100, 'correct ticket prize');
 
                 await baseLotteryInstance.buyTicket(ticketNumber, { value: ticketPrice.toString(), from: accounts[1] });
                 await baseLotteryInstance.buyTicket(ticketNumber, { value: ticketPrice.toString(), from: accounts[2] });
 
                 prize = await baseLotteryInstance.todaysPrize();
-                assert.equal(prize.toNumber(), ticketPrice * 3, 'correct ticket prize');
+                assert.equal(prize.toNumber(), ticketPrice * 3 * 99 / 100, 'correct ticket prize');
             });
     });
 });

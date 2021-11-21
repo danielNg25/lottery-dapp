@@ -1,4 +1,4 @@
-
+import Web3 from "web3";
 import React, { useState } from "react";
 import { useContext, useEffect } from "react";
 
@@ -15,7 +15,7 @@ export default function Header() {
   }, [lottery])
   return (
     <div className="header">
-      <div className="todayPrize">Today's Prize: {prize} ETH</div>
+      <div className="todayPrize">Today's Prize: {Web3.utils.fromWei(prize, 'ether')} ETH</div>
     </div>
   );
 }

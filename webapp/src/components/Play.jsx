@@ -3,6 +3,8 @@ import { useContext, useEffect } from "react";
 import Web3 from "web3";
 import AddressContext from "../contexts/addressContext";
 import LotteryContext from "../contexts/lotteryContext";
+import { v4 as uuidv4 } from 'uuid';
+
 export default function Play() {
   const ticketLength = 100;
 
@@ -12,6 +14,7 @@ export default function Play() {
   const [ticket, setTicket] = useState("");
   const [balance, setBalance] = useState("0");
   const [ticketToBuy, setTicketToBuy] = useState("");
+  const [players, setPlayers] = useState([]);
 
   useEffect(async () => {
     let userBalance = await lottery.methods.balances(addressContext).call();
@@ -24,38 +27,55 @@ export default function Play() {
     }
     let price = await lottery.methods.ticketPrice().call();
     setTicketPrice(price);
-    
+
+    let playersCount = await lottery.methods.playersCount().call();
+
+    for (let i = 1; i <= playersCount; i++) {
+      let newPlayers = await lottery.methods.playersMap(i).call();
+
+      setPlayers((prevPlayers) => [...prevPlayers, newPlayers]);
+    }
   }, [addressContext]);
 
-  const handleBuyTicket = async (e) =>{
+  const handleBuyTicket = async (e) => {
     e.preventDefault();
-    if (ticketToBuy >= 0 && ticketToBuy <=99){
-      
-      await lottery.methods.buyTicket(ticketToBuy).send({from: addressContext, value: ticketPrice})
-    }else{
-      alert("Ticket number not valid")
+    if (ticketToBuy >= 0 && ticketToBuy <= 99) {
+      await lottery.methods
+        .buyTicket(ticketToBuy)
+        .send({ from: addressContext, value: ticketPrice });
+    } else {
+      alert("Ticket number not valid");
     }
-  }
+  };
 
   return (
     <div className="play">
       {addressContext && (
         <div>
-          <div className="balance">Your balance in contract: {balance} ETH</div>
+          <div className="balance">
+            Your balance in contract: {Web3.utils.fromWei(balance, "ether")} ETH
+          </div>
           {ticket ? (
             <div className="userTicket">Your ticket: {ticket}</div>
           ) : (
             <>
-              <div className="userTicket">Try your luck! Ticket Price: {Web3.utils.fromWei(ticketPrice, 'ether')} ETH </div>
+              <div className="userTicket">
+                Try your luck! Ticket Price:{" "}
+                {Web3.utils.fromWei(ticketPrice, "ether")} ETH{" "}
+              </div>
               <form className="buyTicket">
                 <input
                   type="text"
                   id="ticketInput"
                   placeholder="Your ticket must be a 2-digits number"
                   className="ticketInput"
-                  onChange = {(e) => setTicketToBuy(e.target.value)}
+                  onChange={(e) => setTicketToBuy(e.target.value)}
                 />
-                <button className="ticketSubmit" type="submit" onClick={handleBuyTicket}>
+                <button
+                  className="ticketSubmit"
+                  type="submit"
+                  onClick={handleBuyTicket}
+                >
                   Buy
                 </button>
               </form>
@@ -71,11 +91,16 @@ export default function Play() {
             <th>Address</th>
             <th>Ticket</th>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>0x73f5D11F90257f9C4B280758a6E6E893ed9a43c4</td>
-            <td>1234</td>
-          </tr>
+
+          {players.map((p, index) => {
+            return (
+              <tr key={uuidv4()}>
+                <td>{index + 1}</td>
+                <td>{p.wallet}</td>
+                <td>{p.ticket}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

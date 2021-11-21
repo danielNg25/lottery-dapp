@@ -24,7 +24,7 @@ contract BaseLottery is Ownable {
 
     //function to buy ticket
     function buyTicket(uint32 _ticket) external payable {
-        require(addressToPlayers[msg.sender].wallet != address(0));
+        require(addressToPlayers[msg.sender].wallet == address(0));
         require(_ticket <= 99);
         require(msg.value == ticketPrice);
         playersCount++;
