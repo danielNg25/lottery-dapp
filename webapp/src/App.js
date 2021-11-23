@@ -20,11 +20,18 @@ function App() {
   const [lastToken, setLastToken] = useState();
   return (
     <Router>
+      {/** "/" is path of home page where you buy ticket
+       * WARNING: have to on this path when you connect to Metamask to avoid errors
+       * "/win" shows winners of the last time
+       * "/player" shows all players this time
+       * "/nft" shows all tickt NFT token of connected address
+       * WARNING: refresh every time perform a transaction, still working on events function
+       */}
       <LotteryContext.Provider value={[lottery, setLottery]}>
         <AddressContext.Provider value={[address, setAddress]}>
           <TokenContext.Provider value={[token, setToken]}>
             <LastTokenContext.Provider value={[lastToken, setLastToken]}>
-              <Topbar />
+              <Topbar />{" "}
               {lottery ? (
                 <>
                   <Header />
@@ -65,9 +72,9 @@ function App() {
                 </>
               ) : (
                 <About />
-              )}
-            </LastTokenContext.Provider>
-          </TokenContext.Provider>
+              )}{" "}
+            </LastTokenContext.Provider>{" "}
+          </TokenContext.Provider>{" "}
         </AddressContext.Provider>{" "}
       </LotteryContext.Provider>{" "}
     </Router>

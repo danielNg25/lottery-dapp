@@ -1,8 +1,6 @@
 import Web3 from "web3";
 import React, { useState } from "react";
 import { useContext, useEffect } from "react";
-
-
 import LotteryContext from "../contexts/lotteryContext"
 export default function Header() {
   const [lottery] = useContext(LotteryContext);
