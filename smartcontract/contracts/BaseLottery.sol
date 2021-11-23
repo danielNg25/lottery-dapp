@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-import "../contracts/Ownable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract BaseLottery is Ownable {
     event onPrizeChange(uint256 _prize);
