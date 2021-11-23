@@ -13,7 +13,8 @@ export default function LastWin() {
       let pCount = await lastToken.methods.winnersCount().call();
       setPlayersCount(pCount);
       for (let i = 1; i <= pCount; i++) {
-        let newPlayers = await lastToken.methods.winnersMap(i).call();
+        let newPlayersId = await lastToken.methods.winnersMapId(i).call();
+        let newPlayers = await lastToken.methods.idToPlayer(newPlayersId).call();
         setPlayers((prevPlayers) => [...prevPlayers, newPlayers]);
       }
       let prize = await lastToken.methods.prize().call();

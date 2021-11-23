@@ -29,7 +29,7 @@ export default function Topbar(props) {
       setAddressContext(accounts[0]);
      
 
-      if (accounts[0] === ADMIN_ADDRESS) {
+      if (accounts[0] == ADMIN_ADDRESS) {
         setIsAdmin(true);
       }
       
@@ -52,7 +52,7 @@ export default function Topbar(props) {
         lastTokenAddress.toString()
       );
       setLastToken(lastNFTToken);
-
+      
     }
     // // Legacy DApp Browsers
     // else if (window.web3) {
@@ -70,7 +70,7 @@ export default function Topbar(props) {
   }
 
   const handleStartLottery = async () => {
-    if (addressContext === ADMIN_ADDRESS) {
+    if (addressContext == ADMIN_ADDRESS) {
       await lottery.methods.firstTimeSetUp().send({ from: addressContext });
     } else {
       alert("dcm");
@@ -108,6 +108,7 @@ export default function Topbar(props) {
       <div className="topRight">
         {addressContext ? (
           <h3 className="topTitle">{addressContext}</h3>
+          
         ) : (
           <button className="connectMM" onClick={handleConnectMM}>
             Connect MM

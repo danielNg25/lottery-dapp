@@ -103,23 +103,12 @@ export const TOKEN_ABI = [{
             "name": "",
             "type": "address"
         }],
-        "name": "addressToPlayer",
+        "name": "addressToId",
         "outputs": [{
-                "internalType": "address",
-                "name": "wallet",
-                "type": "address"
-            },
-            {
-                "internalType": "uint8",
-                "name": "ticket",
-                "type": "uint8"
-            },
-            {
-                "internalType": "bool",
-                "name": "isWinner",
-                "type": "bool"
-            }
-        ],
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
         "stateMutability": "view",
         "type": "function"
     },
@@ -473,23 +462,12 @@ export const TOKEN_ABI = [{
             "name": "",
             "type": "uint256"
         }],
-        "name": "winnersMap",
+        "name": "winnersMapId",
         "outputs": [{
-                "internalType": "address",
-                "name": "wallet",
-                "type": "address"
-            },
-            {
-                "internalType": "uint8",
-                "name": "ticket",
-                "type": "uint8"
-            },
-            {
-                "internalType": "bool",
-                "name": "isWinner",
-                "type": "bool"
-            }
-        ],
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
         "stateMutability": "view",
         "type": "function"
     },

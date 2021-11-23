@@ -20,11 +20,12 @@ export default function NftList() {
                     TOKEN_ABI,
                     tokenAddress.toString()
                 );
-                let token = await tokenContract.methods.addressToPlayer(addressContext).call();
-
+                let tokenId = await tokenContract.methods.addressToId(addressContext).call();
+                let token = await tokenContract.methods.idToPlayer(tokenId).call();
                 
                 if(token.wallet != ZERO_ADDRESS){
                     token.times = i;
+                    token.address = tokenAddress.toString();
                     setUsersTokens((prevTokens) => [...prevTokens, token]);
                 }
 
@@ -41,6 +42,7 @@ export default function NftList() {
             <tr>
               <th>No</th>
               <th>Times</th>
+              <th>Token Address</th>
               <th>Ticket</th>
               <th>Won</th>
             </tr>
@@ -49,6 +51,7 @@ export default function NftList() {
                 <tr key={uuidv4()}>
                   <td>{index + 1}</td>
                   <td>{t.times}</td>
+                  <td>{t.address}</td>
                   <td>{t.ticket}</td>
                   <td>{t.isWinner.toString()} </td>
                 </tr>
