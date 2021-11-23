@@ -1,6 +1,11 @@
-export const LOTTERY_ADDRESS = "0x600E5CB56D9E863a4754b8cC7e7C4B7acE4239D9"
+export const LOTTERY_ADDRESS = "0x7970A558276b42904D5ba53E5E96a8F270C03F7a"
 
 export const LOTTERY_ABI = [{
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
         "anonymous": false,
         "inputs": [{
                 "indexed": true,
@@ -76,28 +81,6 @@ export const LOTTERY_ABI = [{
             "name": "",
             "type": "address"
         }],
-        "name": "addressToPlayers",
-        "outputs": [{
-                "internalType": "uint32",
-                "name": "ticket",
-                "type": "uint32"
-            },
-            {
-                "internalType": "address",
-                "name": "wallet",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function",
-        "constant": true
-    },
-    {
-        "inputs": [{
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-        }],
         "name": "balances",
         "outputs": [{
             "internalType": "uint256",
@@ -109,64 +92,12 @@ export const LOTTERY_ABI = [{
         "constant": true
     },
     {
-        "inputs": [{
-            "internalType": "uint32",
-            "name": "_ticket",
-            "type": "uint32"
-        }],
-        "name": "buyTicket",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function",
-        "payable": true
-    },
-    {
         "inputs": [],
-        "name": "getBalance",
+        "name": "lotteryTimes",
         "outputs": [{
             "internalType": "uint256",
             "name": "",
             "type": "uint256"
-        }],
-        "stateMutability": "view",
-        "type": "function",
-        "constant": true
-    },
-    {
-        "inputs": [{
-            "internalType": "address",
-            "name": "_address",
-            "type": "address"
-        }],
-        "name": "getTicketByAddress",
-        "outputs": [{
-            "internalType": "uint32",
-            "name": "",
-            "type": "uint32"
-        }],
-        "stateMutability": "view",
-        "type": "function",
-        "constant": true
-    },
-    {
-        "inputs": [],
-        "name": "lastPrize",
-        "outputs": [{
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-        }],
-        "stateMutability": "view",
-        "type": "function",
-        "constant": true
-    },
-    {
-        "inputs": [],
-        "name": "lastResult",
-        "outputs": [{
-            "internalType": "uint32",
-            "name": "",
-            "type": "uint32"
         }],
         "stateMutability": "view",
         "type": "function",
@@ -186,44 +117,22 @@ export const LOTTERY_ABI = [{
     },
     {
         "inputs": [],
-        "name": "playersCount",
-        "outputs": [{
-            "internalType": "uint32",
-            "name": "",
-            "type": "uint32"
-        }],
-        "stateMutability": "view",
-        "type": "function",
-        "constant": true
-    },
-    {
-        "inputs": [{
-            "internalType": "uint32",
-            "name": "",
-            "type": "uint32"
-        }],
-        "name": "playersMap",
-        "outputs": [{
-                "internalType": "uint32",
-                "name": "ticket",
-                "type": "uint32"
-            },
-            {
-                "internalType": "address",
-                "name": "wallet",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function",
-        "constant": true
-    },
-    {
-        "inputs": [],
         "name": "renounceOwnership",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "ticketNFT",
+        "outputs": [{
+            "internalType": "contract TicketNFT",
+            "name": "",
+            "type": "address"
+        }],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
     },
     {
         "inputs": [],
@@ -232,6 +141,22 @@ export const LOTTERY_ABI = [{
             "internalType": "uint256",
             "name": "",
             "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+    },
+    {
+        "inputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "name": "timesToNFTAddress",
+        "outputs": [{
+            "internalType": "address",
+            "name": "",
+            "type": "address"
         }],
         "stateMutability": "view",
         "type": "function",
@@ -261,12 +186,29 @@ export const LOTTERY_ABI = [{
         "type": "function"
     },
     {
+        "stateMutability": "payable",
+        "type": "receive",
+        "payable": true
+    },
+    {
+        "inputs": [{
+            "internalType": "uint8",
+            "name": "_ticket",
+            "type": "uint8"
+        }],
+        "name": "buyTicket",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function",
+        "payable": true
+    },
+    {
         "inputs": [],
-        "name": "winnersCount",
+        "name": "getBalance",
         "outputs": [{
-            "internalType": "uint32",
+            "internalType": "uint256",
             "name": "",
-            "type": "uint32"
+            "type": "uint256"
         }],
         "stateMutability": "view",
         "type": "function",
@@ -274,30 +216,35 @@ export const LOTTERY_ABI = [{
     },
     {
         "inputs": [{
-            "internalType": "uint32",
-            "name": "",
-            "type": "uint32"
+            "internalType": "address",
+            "name": "_address",
+            "type": "address"
         }],
-        "name": "winnersMap",
+        "name": "getTicketByAddress",
         "outputs": [{
-                "internalType": "uint32",
-                "name": "ticket",
-                "type": "uint32"
-            },
-            {
-                "internalType": "address",
-                "name": "wallet",
-                "type": "address"
-            }
-        ],
+            "internalType": "uint8",
+            "name": "",
+            "type": "uint8"
+        }],
         "stateMutability": "view",
         "type": "function",
         "constant": true
     },
     {
-        "stateMutability": "payable",
-        "type": "receive",
-        "payable": true
+        "inputs": [{
+            "internalType": "uint8",
+            "name": "_number",
+            "type": "uint8"
+        }],
+        "name": "getRandomNumber",
+        "outputs": [{
+            "internalType": "uint8",
+            "name": "",
+            "type": "uint8"
+        }],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
     },
     {
         "inputs": [],
@@ -308,15 +255,10 @@ export const LOTTERY_ABI = [{
     },
     {
         "inputs": [],
-        "name": "getAccountBalance",
-        "outputs": [{
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-        }],
-        "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "name": "firstTimeSetUp",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
     },
     {
         "inputs": [{
@@ -335,15 +277,15 @@ export const LOTTERY_ABI = [{
     },
     {
         "inputs": [{
-            "internalType": "uint32",
-            "name": "_number",
-            "type": "uint32"
+            "internalType": "uint256",
+            "name": "_time",
+            "type": "uint256"
         }],
-        "name": "getRandomNumber",
+        "name": "getTicketNFTAddressByTime",
         "outputs": [{
-            "internalType": "uint32",
+            "internalType": "address",
             "name": "",
-            "type": "uint32"
+            "type": "address"
         }],
         "stateMutability": "view",
         "type": "function",

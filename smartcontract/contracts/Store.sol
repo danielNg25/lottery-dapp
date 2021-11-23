@@ -19,7 +19,6 @@ contract Store is Ownable, ReentrancyGuard {
     uint256 public todaysPrize;
     uint256 public lotteryTimes;
 
-    uint256 public lastPrize;
 
     TicketNFT public ticketNFT;
 
@@ -32,7 +31,7 @@ contract Store is Ownable, ReentrancyGuard {
     }
 
     constructor() Ownable() {
-        ticketSize = 100;
+        ticketSize = 5;
         ticketPrice = 0.001 ether;
         todaysPrize = 0;
         lotteryTimes = 0;

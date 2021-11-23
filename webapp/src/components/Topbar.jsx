@@ -1,24 +1,58 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AddressContext from "../contexts/addressContext";
 import LotteryContext from "../contexts/lotteryContext";
+import TokenContext from "../contexts/currentTokenContext";
+import LastTokenContext from "../contexts/lastTokenContext";
 import Web3 from "web3";
 import { LOTTERY_ABI, LOTTERY_ADDRESS } from "../lottery";
+import {ADMIN_ADDRESS} from "../config";
+import { TOKEN_ABI } from "../tokenABI";
 export default function Topbar(props) {
   const [addressContext, setAddressContext] = useContext(AddressContext);
   const [lottery, setLottery] = useContext(LotteryContext);
+  const [token, setToken] = useContext(TokenContext);
+  const [lastToken, setLastToken] = useContext(LastTokenContext);
+
+  const [isAdmin, setIsAdmin] = useState(false);
+
   const handleConnectMM = async () => {
     if (
       typeof window !== "undefined" &&
       typeof window.ethereum !== "undefined"
     ) {
       // We are in the browser and metamask is running.
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
       const web3 = new Web3(window.ethereum);
       setAddressContext(accounts[0]);
-      const lotteryContract = new web3.eth.Contract(LOTTERY_ABI, LOTTERY_ADDRESS);
-      console.log(lotteryContract);
+     
+
+      if (accounts[0] === ADMIN_ADDRESS) {
+        setIsAdmin(true);
+      }
+      
+      const lotteryContract = new web3.eth.Contract(
+        LOTTERY_ABI,
+        LOTTERY_ADDRESS
+      );
       setLottery(lotteryContract);
+
+      const NFTTokenAddress = await lotteryContract.methods.ticketNFT().call();
+      const NFTToken = new web3.eth.Contract(
+        TOKEN_ABI,
+        NFTTokenAddress.toString()
+      );
+      setToken(NFTToken);
+      const lotteryTime = await lotteryContract.methods.lotteryTimes().call();
+      const lastTokenAddress = await lotteryContract.methods.timesToNFTAddress(lotteryTime-1).call();
+      const lastNFTToken = new web3.eth.Contract(
+        TOKEN_ABI,
+        lastTokenAddress.toString()
+      );
+      setLastToken(lastNFTToken);
+
     }
     // // Legacy DApp Browsers
     // else if (window.web3) {
@@ -29,10 +63,19 @@ export default function Topbar(props) {
       alert("You have to install MetaMask !");
       return;
     }
-    
-    
   };
 
+  const handleSetResult = async () =>{
+    await lottery.methods.setResult().send({from : addressContext})
+  }
+
+  const handleStartLottery = async () => {
+    if (addressContext === ADMIN_ADDRESS) {
+      await lottery.methods.firstTimeSetUp().send({ from: addressContext });
+    } else {
+      alert("dcm");
+    }
+  };
   return (
     <div className="top">
       <div className="topLeft">
@@ -50,6 +93,16 @@ export default function Topbar(props) {
               LAST WINNER
             </Link>
           </li>
+          <li className="topListItem">
+            <Link to="/player" className="link">
+              ALL PLAYERS
+            </Link>
+          </li>
+          <li className="topListItem">
+            <Link to="/nft" className="link">
+              YOUR NFT
+            </Link>
+          </li>
         </ul>
       </div>
       <div className="topRight">
@@ -58,6 +111,11 @@ export default function Topbar(props) {
         ) : (
           <button className="connectMM" onClick={handleConnectMM}>
             Connect MM
+          </button>
+        )}
+        {isAdmin && (
+          <button className="connectMM" onClick={handleSetResult}>
+            Set Result
           </button>
         )}
       </div>

@@ -11,7 +11,7 @@ contract TicketNFT is Ownable, ERC721, ReentrancyGuard {
 
     bool public ended;
 
-    uint8 private ticketSize = 100;
+    uint8 private ticketSize;
     uint8 public result;
 
     uint256 public lotteryTime;
@@ -26,8 +26,8 @@ contract TicketNFT is Ownable, ERC721, ReentrancyGuard {
     }
 
     mapping(uint256 => Player) public idToPlayer;
-    mapping(address => Player) public addressToPlayer;
-    mapping(uint256 => Player) public winnersMap;
+    mapping(address => uint256) public addressToId;
+    mapping(uint256 => uint256) public winnersMapId;
 
     modifier notEnded() {
         require(!ended);
@@ -38,7 +38,7 @@ contract TicketNFT is Ownable, ERC721, ReentrancyGuard {
         ERC721("NDTLottery", "NDT")
         Ownable()
     {
-        
+        ticketSize = 5;
         lotteryTime = _times;
     }
 
@@ -54,7 +54,7 @@ contract TicketNFT is Ownable, ERC721, ReentrancyGuard {
 
         tokenId = tokenId.add(1);
         idToPlayer[tokenId] = Player(_playerAddress, ticket, false);
-        addressToPlayer[_playerAddress] = idToPlayer[tokenId];
+        addressToId[_playerAddress] = tokenId;
 
         _safeMint(_playerAddress, tokenId);
     }
@@ -65,13 +65,13 @@ contract TicketNFT is Ownable, ERC721, ReentrancyGuard {
         returns (uint8)
     {
         if (hasPlayed(_address)) {
-            return addressToPlayer[_address].ticket;
+            return idToPlayer[addressToId[_address]].ticket;
         }
         return ticketSize;
     }
 
     function hasPlayed(address _address) public view returns (bool) {
-        if (addressToPlayer[_address].wallet != address(0)) {
+        if (idToPlayer[addressToId[_address]].wallet != address(0)) {
             return true;
         }
         return false;
@@ -89,7 +89,7 @@ contract TicketNFT is Ownable, ERC721, ReentrancyGuard {
                 if(idToPlayer[i].ticket == result){
                     winnersCount = winnersCount.add(1);
                     idToPlayer[i].isWinner = true;
-                    winnersMap[winnersCount] = idToPlayer[i];
+                    winnersMapId[winnersCount] = i;
                 }
             }
         }
@@ -102,6 +102,6 @@ contract TicketNFT is Ownable, ERC721, ReentrancyGuard {
     }
 
     function getWinnerAddressByIndex(uint256 _index) view external returns(address){
-        return winnersMap[_index].wallet;
+        return idToPlayer[winnersMapId[_index]].wallet;
     }
 }

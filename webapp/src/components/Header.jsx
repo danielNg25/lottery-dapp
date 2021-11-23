@@ -5,13 +5,15 @@ import { useContext, useEffect } from "react";
 
 import LotteryContext from "../contexts/lotteryContext"
 export default function Header() {
-  const [lottery, setLottery] = useContext(LotteryContext);
+  const [lottery] = useContext(LotteryContext);
   const [prize, setPrize] = useState("");
-  useEffect(async () =>{
+  useEffect( () =>{
+    const fetchTicketPrize = async() => {
     let ticketPrize = await lottery.methods.todaysPrize().call();
+    console.log(ticketPrize);
     setPrize(ticketPrize);
-
- 
+    }
+    fetchTicketPrize();
   }, [lottery])
   return (
     <div className="header">
