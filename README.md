@@ -12,6 +12,8 @@
 - Receive prize equal to Total Prize devide Winner Count
 - One player can only buy one Ticket per Ticket times
 - Can manage all their Ticket NFT Token
+- You can find your Token on OpenSea
+![image](https://user-images.githubusercontent.com/53716352/143198699-834f3988-198b-46d7-93fc-94286c2e5cfb.png)
 
 Read more details in contracts
 
