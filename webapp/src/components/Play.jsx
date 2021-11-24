@@ -14,7 +14,7 @@ export default function Play() {
   const [ticket, setTicket] = useState("");
   const [balance, setBalance] = useState("0");
   const [ticketToBuy, setTicketToBuy] = useState("");
-
+  const [amountWithdraw, setAmountWithdraw] = useState("");
   useEffect(() => {
     const fetchUserData = async () => {
       let userBalance = await lottery.methods.balances(addressContext).call();
@@ -35,7 +35,7 @@ export default function Play() {
 
   const handleBuyTicket = async (e) => {
     e.preventDefault();
-    if (ticketToBuy >= 0 && ticketToBuy <= 99) {
+    if (ticketToBuy >= 0 && ticketToBuy <= 4) {
       await lottery.methods
         .buyTicket(ticketToBuy)
         .send({ from: addressContext, value: ticketPrice });
@@ -44,11 +44,33 @@ export default function Play() {
     }
   };
 
+  const handleWithDraw = async (e) => {
+    e.preventDefault();
+    if (amountWithdraw > 0 && amountWithdraw <= balance) {
+      await lottery.methods
+        .withdraw(Web3.utils.toWei(amountWithdraw))
+        .send({ from: addressContext });
+    } else {
+      alert("Amount not valid");
+    }
+  };
   return (
     <div className="play">
       {addressContext && (
         <div>
           <div className="balance">
+            <form className="withDraw">
+              <input
+                type="text"
+                id="amountToWithDraw"
+                placeholder="Ether amount to withdraw"
+                className="withDrawInput"
+                onChange={(e) => setAmountWithdraw(e.target.value)}
+              />
+              <button className="withDrawButton" onClick={handleWithDraw}>
+                With Draw
+              </button>
+            </form>
             Your balance in contract: {Web3.utils.fromWei(balance, "ether")} ETH
           </div>
           {ticket ? (
@@ -66,7 +88,7 @@ export default function Play() {
                 <input
                   type="text"
                   id="ticketInput"
-                  placeholder="Your ticket must be a 2-digits number"
+                  placeholder="Your ticket must be a number less than 5"
                   className="ticketInput"
                   onChange={(e) => setTicketToBuy(e.target.value)}
                 />
