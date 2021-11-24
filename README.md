@@ -39,12 +39,28 @@ Web app based on Store contract at address "0xb192E16EE4f6461D216EE6537f5369ab8b
 
 ### ReactJS Web app
 
-- Go to web app server
+- Go to web app folder
 - Then run these commands in terminal/shell
 ```npm
     npm install
     npm start
 ```
 
-Read more about contracts in /smartcontract folder
+### Contracts
+#### To deploy your own contracts
 
+- Go to smartcontract folder
+- Modify file truffle-config.js to match your network
+- Then run this command in terminal/shell
+```
+    truffle migrate --network your-network-name
+```
+- Modify contract address in lottery.js file in webapp folder to match your contract
+- Start Web app
+
+#### To test contracts
+- Go to smartcontract folder
+- Then run this command in terminal/shell
+```
+    truffle test
+```
