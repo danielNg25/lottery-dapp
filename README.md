@@ -46,5 +46,5 @@ Web app based on Store contract at address "0xb192E16EE4f6461D216EE6537f5369ab8b
     npm start
 ```
 
-Read more about contracts in contracts folder
+Read more about contracts in /smartcontract folder
 
