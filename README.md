@@ -30,3 +30,21 @@
 Read more details in contracts
 
 ## How to run
+Git clone this repository
+
+### Meta Mask
+Web app based on Store contract at address "0xb192E16EE4f6461D216EE6537f5369ab8bcC6F92" on Rinkeby Testnet
+- Create your own account
+- Get free Ether on Rinkeby from a faucet (Ex: https://faucet.rinkeby.io/)
+
+### ReactJS Web app
+
+- Go to web app server
+- Then run these commands in terminal/shell
+```npm
+    npm install
+    npm start
+```
+
+Read more about contracts in contracts folder
+
