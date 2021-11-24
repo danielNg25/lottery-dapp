@@ -65,3 +65,6 @@ Web app based on Store contract at address "0xb192E16EE4f6461D216EE6537f5369ab8b
 
 - Manage all your ticket token
 ![image](https://user-images.githubusercontent.com/53716352/143092037-3dcd3e86-9164-4e21-bae5-002832a59ffb.png)
+
+- Withdraw
+![image](https://user-images.githubusercontent.com/53716352/143195241-e00f4dad-e90d-4d6d-bd50-41d08698a4c8.png)
