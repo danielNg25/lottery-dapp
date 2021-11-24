@@ -20,11 +20,13 @@ Git clone this repository
 
 ### Meta Mask
 Web app based on Store contract at address "0xb192E16EE4f6461D216EE6537f5369ab8bcC6F92" on Rinkeby Testnet
+- Install Meta Mask extention
 - Create your own account
 - Get free Ether on Rinkeby from a faucet (Ex: https://faucet.rinkeby.io/)
 
 ### ReactJS Web app
 
+- Install [NodeJS](https://nodejs.org/en/download/)
 - Go to web app folder
 - Then run these commands in terminal/shell
 ```npm
