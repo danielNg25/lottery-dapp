@@ -1,5 +1,5 @@
 export const LOTTERY_ADDRESS = "0xb192E16EE4f6461D216EE6537f5369ab8bcC6F92"
-
+export const LOTTERY_ADDRESS_BSC_TESTNET = "0x05364c26226fe2246aFB5B13e800296bACdaE3e0"
 export const LOTTERY_ABI = [{
         "inputs": [],
         "stateMutability": "nonpayable",

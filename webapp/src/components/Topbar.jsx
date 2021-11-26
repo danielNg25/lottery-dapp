@@ -5,7 +5,7 @@ import LotteryContext from "../contexts/lotteryContext";
 import TokenContext from "../contexts/currentTokenContext";
 import LastTokenContext from "../contexts/lastTokenContext";
 import Web3 from "web3";
-import { LOTTERY_ABI, LOTTERY_ADDRESS } from "../lottery";
+import { LOTTERY_ABI,LOTTERY_ADDRESS_BSC_TESTNET, LOTTERY_ADDRESS } from "../lottery";
 import {ADMIN_ADDRESS} from "../config";
 import { TOKEN_ABI } from "../tokenABI";
 export default function Topbar(props) {
@@ -35,7 +35,7 @@ export default function Topbar(props) {
       
       const lotteryContract = new web3.eth.Contract(
         LOTTERY_ABI,
-        LOTTERY_ADDRESS
+        LOTTERY_ADDRESS_BSC_TESTNET
       );
       setLottery(lotteryContract);
 

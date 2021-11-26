@@ -59,6 +59,13 @@ module.exports = {
         // },
         // Useful for deploying to a public network.
         // NB: It's important to wrap the provider as a function.
+        bsctestnet: {
+            provider: () => new HDWalletProvider(mnemonic, `https://data-seed-prebsc-1-s1.binance.org:8545`),
+            network_id: 97,
+            confirmations: 10,
+            timeoutBlocks: 200,
+            skipDryRun: true
+        },
         rinkeby: {
             provider: () =>
                 new HDWalletProvider(
@@ -73,6 +80,7 @@ module.exports = {
             timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
             skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
         },
+
         // Useful for private networks
         // private: {
         // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),
