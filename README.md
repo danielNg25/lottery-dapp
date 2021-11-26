@@ -49,6 +49,7 @@ Web app based on Store contract at address "0xb192E16EE4f6461D216EE6537f5369ab8b
 - Start Web app
 
 #### To test contracts
+- Install and open [Ganache](https://www.trufflesuite.com/ganache) for a local Ethereum network
 - Go to smartcontract folder
 - Then run this command in terminal/shell
 ```
