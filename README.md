@@ -21,10 +21,10 @@ Read more details in contracts
 Git clone this repository
 
 ### Meta Mask
-Web app based on Store contract at address "0xb192E16EE4f6461D216EE6537f5369ab8bcC6F92" on Rinkeby Testnet
+Web app based on Store contract at address "0xb192E16EE4f6461D216EE6537f5369ab8bcC6F92" on Rinkeby Testnet and "0x05364c26226fe2246aFB5B13e800296bACdaE3e0 " on BSC Testnet
 - Install Meta Mask extention
 - Create your own account
-- Get free Ether on Rinkeby from a faucet (Ex: https://faucet.rinkeby.io/)
+- Get free Ether on [Rinkeby faucet](https://faucet.rinkeby.io/) or [BSC testnet faucet](https://testnet.binance.org/faucet-smart)
 
 ### ReactJS Web app
 
@@ -35,7 +35,7 @@ Web app based on Store contract at address "0xb192E16EE4f6461D216EE6537f5369ab8b
     npm install
     npm start
 ```
-
+App will run on BSC testnet by default. Change contract address in lottery.js file to match your net.
 ### Contracts
 #### To deploy your own contracts
 
